@@ -22,10 +22,17 @@ export default function App() {
       formData.append('resumeFile', formDataFromChild.resumeFile);
 
       // 3. Make the API Call to your Node backend
-      const response = await fetch('http://localhost:5000/api/generate-portfolio', {
-        method: 'POST',
-        body: formData, // Browser automatically sets Content-Type to multipart/form-data
-      });
+      const API_URL = import.meta.env.VITE_API_URL;
+
+      const response = await fetch(
+        `${API_URL}/generate-portfolio`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const data = await response.json();
 
       const result = await response.json();
 
