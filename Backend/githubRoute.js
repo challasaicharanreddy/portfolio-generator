@@ -13,14 +13,7 @@ const require = createRequire(import.meta.url);
 const pdfParse = require('pdf-parse');
 
 const router = express.Router();
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/");
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname);
-  }
-});
+const storage = multer.memoryStorage();
 
 const upload = multer({ storage });
 
@@ -78,9 +71,7 @@ if (linkedinUrl) {
     if (resumeFile) {
       console.log("Parsing uploaded resume PDF buffer...");
   
-      const pdfBuffer = fs.readFileSync(
-        resumeFile.path
-      );
+      const pdfBuffer = resumeFile.buffer;
   
       const pdfData =
         await pdfParse(pdfBuffer);
