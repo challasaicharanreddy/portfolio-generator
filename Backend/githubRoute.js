@@ -78,8 +78,10 @@ if (linkedinUrl) {
   
       const rawText = pdfData.text;
   
+      console.log("Calling Gemini...");
       const geminiResponse =
         await parseResumeWithGemini(rawText);
+        console.log("Gemini finished");
   
       console.log("Gemini Response:");
       console.log(geminiResponse);
@@ -94,19 +96,6 @@ if (linkedinUrl) {
         console.log("Parsed Resume:");
         console.log(parsedResume);
       
-      } catch (err) {
-        console.error(
-          "Failed to parse Gemini JSON:",
-          err
-        );
-      }
-      try {
-        parsedResume = JSON.parse(
-          geminiResponse
-            .replace(/```json/g, "")
-            .replace(/```/g, "")
-            .trim()
-        );
       } catch (err) {
         console.error(
           "Failed to parse Gemini JSON:",
