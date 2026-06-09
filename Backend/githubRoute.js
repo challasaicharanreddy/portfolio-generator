@@ -144,8 +144,8 @@ if (linkedinUrl) {
       linkedin_name: linkedinName,
       has_resume: !!resumeFile,
       resume_url: resumeFile
-        ? `http://localhost:5000/uploads/${resumeFile.filename}`
-        : "",
+      ? `${process.env.BASE_URL}/uploads/${resumeFile.filename}`
+      : "",
         skills: parsedResume.skills || [],
         education:
           parsedResume.education || [],

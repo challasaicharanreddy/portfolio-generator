@@ -31,17 +31,20 @@ export default function App() {
           body: formData,
         }
       );
-
-      const data = await response.json();
-
+      
       const result = await response.json();
-
+      
       if (!response.ok) {
-        throw new Error(result.error || "Failed to generate portfolio");
+        throw new Error(
+          result.error || "Failed to generate portfolio"
+        );
       }
-
-      // 4. Store your generated profile and repository payload!
-      console.log("Success! Received Portfolio Data:", result);
+      
+      console.log(
+        "Success! Received Portfolio Data:",
+        result
+      );
+      
       setPortfolioData(result);
 
     } catch (err) {

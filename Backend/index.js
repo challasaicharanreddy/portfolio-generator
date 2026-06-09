@@ -5,7 +5,7 @@ import githubRouter from './githubRoute.js'; // Ensure file name matches perfect
 
 dotenv.config();
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 // 1. Enable CORS so your React frontend (usually port 5173) can talk to your backend
 app.use(cors());
