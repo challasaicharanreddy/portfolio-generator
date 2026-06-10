@@ -106,7 +106,13 @@ if (linkedinUrl) {
 
     // 4. Fetch GitHub details as usual
     console.log("Fetching GitHub...");
-    const axiosConfig = { headers: { 'User-Agent': 'Portfolio-Generator-Agent' } };
+    const axiosConfig = { 
+      headers: { 
+        'User-Agent': 'Portfolio-Generator-Agent', 
+        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`
+      }
+      
+    };
     const [profileResponse, reposResponse] = await Promise.all([
       axios.get(`https://api.github.com/users/${username}`, axiosConfig),
       axios.get(`https://api.github.com/users/${username}/repos?sort=updated&per_page=10`, axiosConfig)
