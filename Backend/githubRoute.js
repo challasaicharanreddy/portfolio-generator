@@ -105,11 +105,13 @@ if (linkedinUrl) {
     }
 
     // 4. Fetch GitHub details as usual
+    console.log("Fetching GitHub...");
     const axiosConfig = { headers: { 'User-Agent': 'Portfolio-Generator-Agent' } };
     const [profileResponse, reposResponse] = await Promise.all([
       axios.get(`https://api.github.com/users/${username}`, axiosConfig),
       axios.get(`https://api.github.com/users/${username}/repos?sort=updated&per_page=10`, axiosConfig)
     ]);
+    console.log("GitHub fetched successfully.");
 
     const profile = {
       name:parsedResume.name ||linkedinName ||profileResponse.data.name ||username,
@@ -171,7 +173,21 @@ if (linkedinUrl) {
 
   } catch (error) {
     console.error("Pipeline Failure:", error.message);
-    return res.status(500).json({ error: "Failed to compile developer profile data." });
+    if (error.response) {
+      console.log(
+        "Status:",
+        error.response.status
+      );
+  
+      console.log(
+        "Response Data:",
+        error.response.data
+      );
+    }
+  
+    return res.status(500).json({
+      error: error.message
+    });
   }
 });
 
