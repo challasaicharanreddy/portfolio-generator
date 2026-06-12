@@ -51,7 +51,7 @@ export default function PortfolioTemplate({ data, onReset }) {
                 </Button>
               </a>
             )}
-            {profile.has_resume && (
+            {/* {profile.has_resume && (
             <a
                 href={profile.resume_url}
                 target="_blank"
@@ -65,7 +65,7 @@ export default function PortfolioTemplate({ data, onReset }) {
                 📄 View Resume
                 </Button>
             </a>
-            )}
+            )} */}
           </div>
         </div>
       </section>
